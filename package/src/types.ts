@@ -35,3 +35,9 @@ export enum DLT {
     ETH = "ETHEREUM",
     IOTA = "IOTA"
 }
+
+export interface DLTInterface {
+    getStatus: () => Promise<any>,
+    notarizeHash: (hash: string, index?: string) => Promise<string>,
+    getNotarizedTimestamp: (hash: string, index?: string) => Promise<Date>
+}
