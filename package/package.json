@@ -1,0 +1,54 @@
+{
+  "name": "vc-notarization",
+  "version": "1.0.0",
+  "description": "Notarize verifiable credentials on DLT for provability and order ",
+  "main": "./lib/index.js",
+  "exports": "./lib/index.js",
+  "types": "lib/@types/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm run build:esm && npm run build:types",
+    "build:esm": "tsc -p config/tsconfig.esm.json",
+    "build:types": "tsc -p config/tsconfig.types.json",
+    "test": "cross-env TS_NODE_PROJECT=\"config/tsconfig.test.json\" mocha",
+    "prepare": "cp ./../README.md ./ && npm run build"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/COPPA-CCP/vc-notarization.git"
+  },
+  "keywords": [
+    "notarization",
+    "dlt",
+    "ssi",
+    "verifiable-credential"
+  ],
+  "author": {
+    "name": "European EPC Competence Center GmbH",
+    "email": "info@eecc.info",
+    "url": "https://id.eecc.de/"
+  },
+  "contributors": [
+    "Christian Fries <christian.fries@eecc.de>"
+  ],
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/COPPA-CCP/vc-notarization/issues"
+  },
+  "homepage": "https://github.com/COPPA-CCP/vc-notarization#readme",
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "@types/sinon": "^10.0.14",
+    "chai": "^4.3.7",
+    "cross-env": "^7.0.3",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {}
+}
