@@ -1,4 +1,4 @@
-import { VerifiableCredential, DLT } from './types';
+import { VerifiableCredential, DLT } from './types.js';
 
 import {
     notarizeVC,
