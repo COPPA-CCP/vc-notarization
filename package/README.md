@@ -54,14 +54,9 @@ const credential: VerifiableCredential = {
     }
 }
 
-async function verify(): Promise<Date> {
 
-    return await verifyTimestamp(credential);
-
-}
-
-verify()
+verifyTimestamp(credential)
     .then((timestamp: Date) => {
-        console.log(signedCred)
+        console.log(timestamp)
     });
 ```
