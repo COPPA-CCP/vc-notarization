@@ -18,7 +18,7 @@ Install the npm package
 npm i vc-notarization
 ```
 
-Generate a kay pair and sign a demo event
+Verify the issuance date of a verifiable credential
 
 ```ts
 import { verifyTimestamp, VerifiableCredential } from 'vc-notarization';
