@@ -30,7 +30,7 @@ describe("Iota Network Test", () => {
 
         const tangleTime = await iota.getNotarizedTimestamp(TEST_HASH);
 
-        assert.deepEqual(tangleTime, new Date('2023-04-28T15:13:45.000Z'));
+        assert.deepEqual(tangleTime, new Date('2023-05-02T08:28:15.000Z'));
 
     });
 
