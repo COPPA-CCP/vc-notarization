@@ -5,7 +5,7 @@ Notarize verifiable credentials on DLT for provability and order
 
 ## General Idea
 
-The signature of a [verifiable credential](https://ec.europa.eu/digital-building-blocks/wikis/display/EBSI/EBSI+Verifiable+Credentials)(VC) ensures integrity and immutability of the contained data by a digital signature. By default a VC also proclaims an issuance date which is singed along with the other data. The issue is that the issuer can sign an arbitrary date as the issuance date for the VC, what makes this particular data field gameable for the issuer. In order to make the issuance date verifiable, the VC has to be notarized upon creation. To do this we use distributed ledgers as a trusted third party, providing and immutable order and thereby timestamps to events.
+The signature of a [verifiable credential](https://ec.europa.eu/digital-building-blocks/wikis/display/EBSI/EBSI+Verifiable+Credentials) (VC) ensures integrity and immutability of the contained data by a digital signature. By default a VC also proclaims an issuance date which is singed along with the other data. The issue is that the issuer can sign an arbitrary date as the issuance date for the VC, what makes this particular data field gameable for the issuer. In order to make the issuance date verifiable, the VC has to be notarized upon creation. To do this we use distributed ledgers as a trusted third party, providing and immutable order and thereby timestamps to events.
 
 
 ## Examples
@@ -21,7 +21,7 @@ npm i vc-notarization
 Notarize a VC in order to create a verifiable timestamp on the DLT
 
 ```ts
-import { notarize, VerifiableCredential } from 'vc-notarization';
+import { notarize, VerifiableCredential, NotarizationResponse } from 'vc-notarization';
 
 
 const credential: VerifiableCredential = {
@@ -56,8 +56,8 @@ const credential: VerifiableCredential = {
 
 
 notarize(credential)
-    .then((transactionId: string) => {
-        console.log(`The credentials hash was published by transaction ${transactionId}`)
+    .then((res: NotarizationResponse) => {
+        console.log(`The credentials hash was published by transaction ${res.transactionId}`)
     });
 ```
 

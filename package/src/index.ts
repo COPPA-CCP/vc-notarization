@@ -1,4 +1,4 @@
-import { VerifiableCredential, DLT } from './types.js';
+import { VerifiableCredential, DLT, NotarizationResponse } from './types.js';
 
 import {
     notarizeVC,
@@ -14,7 +14,7 @@ import {
  * @param dlt - The DLT enum of the DLT where the credential
  * @returns The DLT transaction id
  */
-export async function notarize(object: VerifiableCredential | string, dlt: DLT = DLT.IOTA): Promise<string> {
+export async function notarize(object: VerifiableCredential | string, dlt: DLT = DLT.IOTA): Promise<NotarizationResponse> {
 
     if (typeof object == 'string') return await notarizeHash(object, dlt);
 

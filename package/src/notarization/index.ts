@@ -1,4 +1,9 @@
-import { VerifiableCredential, DLT, DLTInterface } from "../types.js";
+import {
+    VerifiableCredential,
+    DLT,
+    DLTInterface,
+    NotarizationResponse
+} from "../types.js";
 
 import { Iota } from "./iota.js";
 
@@ -29,7 +34,7 @@ function getDLTInstance(dlt: DLT): DLTInterface {
  * @param dlt - The DLT enum specifying the DLT on which the hash shall be notarized
  * @returns The DLT transaction id
  */
-export async function notarizeHash(hash: string, dlt: DLT = DLT.IOTA): Promise<string> {
+export async function notarizeHash(hash: string, dlt: DLT = DLT.IOTA): Promise<NotarizationResponse> {
 
     const DLTInstance = getDLTInstance(dlt);
 
@@ -75,7 +80,7 @@ function getVCHash(credential: VerifiableCredential): string {
  * @param dlt - The DLT enum of the DLT where the credential shall be notarized
  * @returns The DLT transaction id
  */
-export async function notarizeVC(credential: VerifiableCredential, dlt: DLT = DLT.IOTA): Promise<string> {
+export async function notarizeVC(credential: VerifiableCredential, dlt: DLT = DLT.IOTA): Promise<NotarizationResponse> {
 
     const hash = getVCHash(credential);
 

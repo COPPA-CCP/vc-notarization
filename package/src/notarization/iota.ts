@@ -2,7 +2,7 @@
 import { MAX_INDEXATION_KEY_LENGTH, retrieveData, sendData, SingleNodeClient, IClient, IMilestoneResponse, IMessageMetadata } from "@iota/iota.js";
 import { Converter } from "@iota/util.js";
 
-import { DLTInterface } from "../types";
+import { DLTInterface, DLT, NotarizationResponse } from "../types.js";
 
 
 const client: IClient = new SingleNodeClient("https://chrysalis-nodes.iota.org");
@@ -24,15 +24,21 @@ function getIndexBytes(index: string): Uint8Array {
 
 export class Iota implements DLTInterface {
 
-    public async notarizeHash(hash: string, index?: string): Promise<string> {
+    private dlt: DLT = DLT.IOTA;
+
+    private explorerURL: string = "https://explorer.iota.org/mainnet/message/";
+
+    public async notarizeHash(hash: string, index?: string): Promise<NotarizationResponse> {
 
         const indexBytes = getIndexBytes(index || hash);
 
         const sendResult = await sendData(client, indexBytes, Converter.utf8ToBytes(hash));
 
-        console.log("Hash successfully notarized on IOTA with message https://explorer.iota.org/mainnet/message/" + sendResult.messageId);
-
-        return sendResult.messageId;
+        return {
+            dlt: this.dlt,
+            transactionId: sendResult.messageId,
+            explorerURL: this.explorerURL + sendResult.messageId
+        }
 
     }
 

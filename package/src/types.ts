@@ -36,8 +36,16 @@ export enum DLT {
     IOTA = "IOTA"
 }
 
+export type NotarizationResponse = {
+    dlt: DLT;
+    transactionId: string;
+    explorerURL?: string | URL;
+}
+
 export interface DLTInterface {
     getStatus: () => Promise<any>,
-    notarizeHash: (hash: string, index?: string) => Promise<string>,
+    notarizeHash: (hash: string, index?: string) => Promise<NotarizationResponse>,
     getNotarizedTimestamp: (hash: string, index?: string) => Promise<Date>
 }
+
+
