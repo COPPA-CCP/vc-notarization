@@ -1,6 +1,6 @@
 {
   "name": "vc-notarization",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Notarize verifiable credentials on DLT for provability and order",
   "main": "./lib/index.js",
   "exports": "./lib/index.js",

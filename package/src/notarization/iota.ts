@@ -2,7 +2,8 @@
 import { MAX_INDEXATION_KEY_LENGTH, retrieveData, sendData, SingleNodeClient, IClient, IMilestoneResponse, IMessageMetadata } from "@iota/iota.js";
 import { Converter } from "@iota/util.js";
 
-import { DLTInterface, DLT, NotarizationResponse } from "../types.js";
+import { DLTInterface, NotarizationResponse } from "../types";
+import { DLT } from '../enums.js';
 
 
 const client: IClient = new SingleNodeClient("https://chrysalis-nodes.iota.org");

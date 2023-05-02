@@ -1,4 +1,5 @@
-import { VerifiableCredential, DLT, NotarizationResponse } from './types.js';
+import { VerifiableCredential, NotarizationResponse } from './types';
+import { DLT } from './enums.js';
 
 import {
     notarizeVC,
@@ -42,7 +43,7 @@ export async function getTimestamp(object: VerifiableCredential | string, dlt: D
  * 
  * @param credential - Verifiable credential for which the timestamp shall be verified
  * @param dlt - The DLT enum of the DLT where the hash is notarized
- * @param tolerance - Time tolerance between issuance and notarization
+ * @param tolerance - Time tolerance between issuance and notarization in milliseconds
  * @returns The timestamp of the latest possible event creation
  */
 export async function verifyTimestamp(credential: VerifiableCredential, dlt: DLT = DLT.IOTA, tolerance: number = 300000): Promise<Date> {
@@ -59,4 +60,5 @@ export async function verifyTimestamp(credential: VerifiableCredential, dlt: DLT
 
 };
 
+export { DLT } from './enums.js';
 export type * from './types';

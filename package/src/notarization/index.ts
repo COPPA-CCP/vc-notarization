@@ -1,9 +1,9 @@
 import {
     VerifiableCredential,
-    DLT,
     DLTInterface,
     NotarizationResponse
-} from "../types.js";
+} from "../types";
+import { DLT } from '../enums.js';
 
 import { Iota } from "./iota.js";
 

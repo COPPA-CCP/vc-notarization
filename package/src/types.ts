@@ -1,5 +1,5 @@
 // global types declaration
-
+import { DLT } from './enums.js'
 /**
  * Verifiable credential types
  */
@@ -30,11 +30,6 @@ export type VerifiableCredential = Verifiable & {
 /**
  * DLT types
  */
-
-export enum DLT {
-    ETH = "ETHEREUM",
-    IOTA = "IOTA"
-}
 
 export type NotarizationResponse = {
     dlt: DLT;
