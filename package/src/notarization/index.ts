@@ -1,4 +1,4 @@
-import { VerifiableCredential, DLT, DLTInterface } from "../types";
+import { VerifiableCredential, DLT, DLTInterface } from "../types.js";
 
 import { Iota } from "./iota.js";
 
