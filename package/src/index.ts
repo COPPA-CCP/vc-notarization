@@ -43,7 +43,7 @@ export async function getTimestamp(object: VerifiableCredential | string, dlt: D
  * 
  * @param credential - Verifiable credential for which the timestamp shall be verified
  * @param dlt - The DLT enum of the DLT where the hash is notarized
- * @param tolerance - Time tolerance between issuance and notarization in milliseconds
+ * @param tolerance - Time tolerance between issuance and notarization in milliseconds - Default is 300 seconds
  * @returns The timestamp of the latest possible event creation
  */
 export async function verifyTimestamp(credential: VerifiableCredential, dlt: DLT = DLT.IOTA, tolerance: number = 300000): Promise<Date> {

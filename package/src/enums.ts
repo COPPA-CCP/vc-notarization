@@ -4,5 +4,6 @@
  */
 export enum DLT {
     ETH = "ETHEREUM",
-    IOTA = "IOTA"
+    IOTA = "IOTA",
+    SHIMMER = "SHIMMER"
 }
