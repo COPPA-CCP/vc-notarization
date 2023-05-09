@@ -5,8 +5,7 @@ import { Converter } from "@iota/util.js";
 import { DLTInterface, NotarizationResponse } from "../types";
 import { DLT } from '../enums.js';
 
-
-const client: IClient = new SingleNodeClient("https://chrysalis-nodes.iota.org");
+const client: IClient = new SingleNodeClient(process.env.IOTA_NODE_URL || "https://chrysalis-nodes.iota.og");
 
 /**
  * Converts the index string into bytes and trims it if necessary
@@ -27,7 +26,7 @@ export class Iota implements DLTInterface {
 
     private dlt: DLT = DLT.IOTA;
 
-    private explorerURL: string = "https://explorer.iota.org/mainnet/message/";
+    private explorerURL: string = process.env.IOTA_EXPLORER_URL || "https://explorer.iota.org/mainnet/message/";
 
     public async notarizeHash(hash: string, index?: string): Promise<NotarizationResponse> {
 
