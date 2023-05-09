@@ -5,7 +5,7 @@ import { Converter } from "@iota/util.js";
 import { DLTInterface, NotarizationResponse } from "../types";
 import { DLT } from '../enums.js';
 
-const client: IClient = new SingleNodeClient(process.env.IOTA_NODE_URL || "https://chrysalis-nodes.iota.og");
+const client: IClient = new SingleNodeClient(process.env.IOTA_NODE_URL || "https://chrysalis-nodes.iota.org");
 
 /**
  * Converts the index string into bytes and trims it if necessary
