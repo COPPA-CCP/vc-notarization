@@ -6,7 +6,7 @@ import { DLTInterface, NotarizationResponse } from "../types";
 import { DLT } from '../enums.js';
 
 
-const client: IClient = new SingleNodeClient("https://api.testnet.shimmer.network");
+const client: IClient = new SingleNodeClient(process.env.SHIMMER_NODE_URL || "https://api.testnet.shimmer.network/api/core/v2", { basePath: "/api/core/v2/" });
 
 /**
  * Converts the index string into bytes and trims it if necessary
@@ -27,7 +27,7 @@ export class Shimmer implements DLTInterface {
 
     private dlt: DLT = DLT.SHIMMER;
 
-    private explorerURL: string = "https://explorer.shimmer.network";
+    private explorerURL: string = process.env.SHIMMER_EXPLORER_URL || "https://explorer.shimmer.network";
 
     public async notarizeHash(hash: string, index?: string): Promise<NotarizationResponse> {
 
