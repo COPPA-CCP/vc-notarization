@@ -35,6 +35,7 @@ export type NotarizationResponse = {
     dlt: DLT;
     transactionId: string;
     explorerURL?: string | URL;
+    proof?: any;
 }
 
 export interface DLTInterface {
