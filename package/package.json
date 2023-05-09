@@ -11,7 +11,7 @@
     "build": "npm run build:esm && npm run build:types",
     "build:esm": "tsc -p config/tsconfig.esm.json",
     "build:types": "tsc -p config/tsconfig.types.json",
-    "test": "cross-env TS_NODE_PROJECT=\"config/tsconfig.test.json\" mocha --timeout 5000",
+    "test": "cross-env TS_NODE_PROJECT=\"config/tsconfig.test.json\" mocha  -r dotenv/config --timeout 5000",
     "prepare": "cp ./../README.md ./ && npm run build"
   },
   "files": [
@@ -51,6 +51,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@iota/iota.js": "^1.8.6"
+    "@iota/iota.js": "^1.8.6",
+    "dotenv": "^16.0.3"
   }
 }
