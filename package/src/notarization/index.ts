@@ -6,6 +6,7 @@ import {
 import { DLT } from '../enums.js';
 
 import { Iota } from "./iota.js";
+import { Shimmer } from "./shimmer.js";
 
 /**
  * Returns an instance of an DLTInterface according to the given DLT enum parameter
@@ -19,6 +20,9 @@ function getDLTInstance(dlt: DLT): DLTInterface {
 
         case DLT.IOTA:
             return new Iota();
+
+        case DLT.SHIMMER:
+            return new Shimmer();
 
         default:
             throw Error(dlt + ' is not a supported DLT');
