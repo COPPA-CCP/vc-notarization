@@ -30,8 +30,9 @@ For notarizing VCs it is necessary to extract an uniquely identifying hash from 
 
 When using a non persistent DLT like shimmer, the nodes prune the transactrion history and thereby the data included in them. In order to verify the existence and timestamp a proof of inlcusion has to be given, which uses merkle trees to proof the existence of the transaction in the DLT at a certain time.
 
-Module: https://github.com/iotaledger/inx-poi
-Example implementation: https://wiki.iota.org/shimmer/tutorials/proof-inclusion-of-a-block
+Specs: https://github.com/iotaledger/tips/blob/milestone-with-signature-blocks/tips/TIP-0029/tip-0029.md  
+Example implementation: https://wiki.iota.org/shimmer/tutorials/proof-inclusion-of-a-block  
+Module: https://github.com/iotaledger/inx-poi  
 
 
 ## Examples
