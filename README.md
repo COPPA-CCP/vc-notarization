@@ -7,6 +7,32 @@ Notarize verifiable credentials on DLT for provability and order
 
 The signature of a [verifiable credential](https://ec.europa.eu/digital-building-blocks/wikis/display/EBSI/EBSI+Verifiable+Credentials) (VC) ensures integrity and immutability of the contained data by a digital signature. By default a VC also proclaims an issuance date which is singed along with the other data. The issue is that the issuer can sign an arbitrary date as the issuance date for the VC, what makes this particular data field gameable for the issuer. In order to make the issuance date verifiable, the VC has to be notarized upon creation. To do this we use distributed ledgers as a trusted third party, providing and immutable order and thereby timestamps to events.
 
+## Supported DLTs
+
+### Public Permissionless
+
+- Ethereum tbd.
+- [Iota](https://www.iota.org/)
+- [Shimmer](https://shimmer.network/)
+
+### Private Permissioned
+
+- Hyperledger (Indy,Fabric ...?) tbd.
+
+
+## Techinical Explanations
+
+### W3C JSON-LD Credentials
+
+For notarizing VCs it is necessary to extract an uniquely identifying hash from them. In the case of W3C JSON-LD VCs the approach is to use the proof value, i.e. the signature value of the linked data signature. Doing this has the advantage that the linked data signature is created over the canonilized form of the VC, what makes two identical VCs identifiable as the same one, indendently of their form of appearance.
+
+### Proof of Inclusion
+
+When using a non persistent DLT like shimmer, the nodes prune the transactrion history and thereby the data included in them. In order to verify the existence and timestamp a proof of inlcusion has to be given, which uses merkle trees to proof the existence of the transaction in the DLT at a certain time.
+
+Module: https://github.com/iotaledger/inx-poi
+Example implementation: https://wiki.iota.org/shimmer/tutorials/proof-inclusion-of-a-block
+
 
 ## Examples
 

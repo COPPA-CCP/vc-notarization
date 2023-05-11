@@ -9,7 +9,7 @@ import {
 } from './notarization/index.js';
 
 /**
- * Takes a string or verifiabel credential object and notarizes it on the desired DLT specified by the DLT enum
+ * Takes a hash string or verifiabel credential object and notarizes it on the desired DLT specified by the DLT enum
  * 
  * @param object - Hash string or verifiabel credential object which shall be notarized
  * @param dlt - The DLT enum of the DLT where the credential
@@ -24,11 +24,11 @@ export async function notarize(object: VerifiableCredential | string, dlt: DLT =
 };
 
 /**
- * Takes a string or verifiable credential object and tries to look up the timestamp of the notarization on the DLT specified by the DLT enum
+ * Takes a hash string or verifiable credential object and tries to look up the timestamp of the notarization on the DLT specified by the DLT enum
  * 
- * @param object - Object for which the timestamp shall be retrieved
+ * @param object - Verifiable credential or hash string for which the timestamp shall be retrieved
  * @param dlt - The DLT enum of the DLT where the credential shall be notarized
- * @param proof - Optional proof of inlclusion if the transaction can not be retrieved from the DLT
+ * @param proof - Optional proof of inlclushion if the transaction can not be retrieved from the DLT
  * @returns The timestamp of the latest possible event creation
  */
 export async function getTimestamp(object: VerifiableCredential | string, dlt: DLT = DLT.IOTA, proof?: any): Promise<Date> {
