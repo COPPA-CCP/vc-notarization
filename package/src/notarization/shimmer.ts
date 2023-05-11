@@ -1,7 +1,7 @@
 
-import { MAX_TAG_LENGTH, retrieveData, sendData, SingleNodeClient, IClient } from "shimmer";
+import { MAX_TAG_LENGTH, retrieveData, sendData, SingleNodeClient, IClient, IPowProvider } from "shimmer";
 import { Converter } from "@iota/util.js";
-import { LocalPowProvider } from "@iota/iota.js"
+import { LocalPowProvider } from "@iota/iota.js";
 
 import { DLTInterface, NotarizationResponse } from "../types";
 import { DLT } from '../enums.js';
@@ -24,6 +24,11 @@ function getNodeHeaders(): any {
     return {}
 }
 
+function getPOWProvider(): IPowProvider | undefined {
+    const powProvider = process.env.SHIMMER_POW;
+    if (powProvider == 'remote') return undefined;
+    return new LocalPowProvider()
+}
 
 /**
  * Converts the index string into bytes and trims it if necessary
@@ -48,7 +53,7 @@ export class Shimmer implements DLTInterface {
 
     private client: IClient = new SingleNodeClient(
         this.nodeURL,
-        { headers: getNodeHeaders(), powProvider: new LocalPowProvider() }
+        { headers: getNodeHeaders(), powProvider: getPOWProvider() }
     );
 
     private explorerURL: string = process.env.SHIMMER_EXPLORER_URL || "https://explorer.shimmer.network/testnet/block/";
@@ -75,11 +80,9 @@ export class Shimmer implements DLTInterface {
                     const result = await response.json();
 
                     return result;
-                } else {
-                    console.log(`Try ${i}: Block ${blockId} was not yet referenced by a milestone`);
                 }
             }
-            console.log(`Block was not referenced by a milestone after ${i} seconds.`);
+            console.warn(`Block was not referenced by a milestone after ${i} seconds. Could not retieve a proof of inclusion.`);
 
             return undefined;
         } catch (error) {

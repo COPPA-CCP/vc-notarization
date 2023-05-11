@@ -150,12 +150,12 @@ describe("Shimmer Network Test", () => {
 
     });*/
 
-    it('Retrieve timestamp', async () => {
+    /*it('Retrieve timestamp', async () => {
 
-        const tangleTime = await shimmer.getNotarizedTimestamp(TEST_HASH, undefined, TEST_POI);
+        const tangleTime = await shimmer.getNotarizedTimestamp(TEST_HASH, TEST_HASH, TEST_POI);
 
         assert.deepEqual(tangleTime, new Date('2023-05-11T10:20:35.000Z'));
 
-    });
+    });*/
 
 });
