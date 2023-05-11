@@ -136,7 +136,7 @@ describe("Shimmer Network Test", () => {
         const status = await shimmer.getStatus();
 
         expect(status.health).to.be.true;
-        expect(status.node.protocol.bech32Hrp).to.be.equal('smr');
+        expect(status.node.protocol.bech32Hrp).to.be.equal('rms');
 
     });
 
