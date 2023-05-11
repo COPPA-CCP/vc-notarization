@@ -6,6 +6,7 @@ import {
 import { DLT } from '../enums.js';
 
 import { Iota } from "./iota.js";
+import { Shimmer } from "./shimmer.js";
 
 /**
  * Returns an instance of an DLTInterface according to the given DLT enum parameter
@@ -19,6 +20,9 @@ function getDLTInstance(dlt: DLT): DLTInterface {
 
         case DLT.IOTA:
             return new Iota();
+
+        case DLT.SHIMMER:
+            return new Shimmer();
 
         default:
             throw Error(dlt + ' is not a supported DLT');
@@ -49,11 +53,11 @@ export async function notarizeHash(hash: string, dlt: DLT = DLT.IOTA): Promise<N
  * @param dlt - The DLT enum of the DLT where the hash is notarized
  * @returns The timestamp of the latest possible event creation
  */
-export async function getNotarizedTimestamp(hash: string, dlt: DLT = DLT.IOTA): Promise<Date> {
+export async function getNotarizedTimestamp(hash: string, dlt: DLT = DLT.IOTA, proof?: any): Promise<Date> {
 
     const DLTInstance = getDLTInstance(dlt);
 
-    return await DLTInstance.getNotarizedTimestamp(hash);
+    return await DLTInstance.getNotarizedTimestamp(hash, proof);
 
 }
 
@@ -95,7 +99,7 @@ export async function notarizeVC(credential: VerifiableCredential, dlt: DLT = DL
  * @param dlt - The DLT enum of the DLT where the hash is notarized
  * @returns The timestamp of the latest possible event creation
  */
-export async function getNotarizedVCTimestamp(credential: VerifiableCredential, dlt: DLT = DLT.IOTA): Promise<Date> {
+export async function getNotarizedVCTimestamp(credential: VerifiableCredential, dlt: DLT = DLT.IOTA, proof?: any): Promise<Date> {
 
     const hash = getVCHash(credential);
 
