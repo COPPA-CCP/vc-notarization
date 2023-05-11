@@ -15,6 +15,15 @@ function wait(time: number) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
+function getNodeHeaders(): any {
+    const jwt = process.env.SHIMMER_NODE_JWT;
+    if (jwt) return {
+        'Authorization': 'Bearer ' + process.env.SHIMMER_NODE_JWT,
+        'Content-Type': 'application/json'
+    }
+    return {}
+}
+
 
 /**
  * Converts the index string into bytes and trims it if necessary
@@ -39,13 +48,13 @@ export class Shimmer implements DLTInterface {
 
     private client: IClient = new SingleNodeClient(
         this.nodeURL,
-        { powProvider: new LocalPowProvider() }
+        { headers: getNodeHeaders(), powProvider: new LocalPowProvider() }
     );
 
     private explorerURL: string = process.env.SHIMMER_EXPLORER_URL || "https://explorer.shimmer.network/testnet/block/";
 
     // Check for block confirmation and return proof of inclusion, if confirmed after n tries
-    private async getNotarization(blockId: string) {
+    private async getNotarization(blockId: string): Promise<any> {
         try {
 
             let i = 0;
@@ -58,25 +67,21 @@ export class Shimmer implements DLTInterface {
 
                 // If a block was referenced by a milestone, the metadata contains the field 'referencedByMilestoneIndex'
                 if ('referencedByMilestoneIndex' in blockMetadata) {
-                    console.log(
-                        `Try ${i}: Block was referenced by milestone #${blockMetadata.referencedByMilestoneIndex}`,
-                        '\n',
-                    );
 
                     // Call "create" endpoint of PoI plugin with blockId and return the result
                     // Not available on public node -> spin up own node
                     const poiPluginUrl = `${this.nodeURL}/api/poi/v1/create/${blockId}`;
-                    const response = await fetch(poiPluginUrl);
+                    const response = await fetch(poiPluginUrl, { headers: getNodeHeaders() });
                     const result = await response.json();
 
                     return result;
                 } else {
-                    console.log(`Try ${i}: Block was not yet referenced by a milestone`);
+                    console.log(`Try ${i}: Block ${blockId} was not yet referenced by a milestone`);
                 }
             }
             console.log(`Block was not referenced by a milestone after ${i} seconds.`);
 
-            return false;
+            return undefined;
         } catch (error) {
             console.log(error);
         }
@@ -99,9 +104,30 @@ export class Shimmer implements DLTInterface {
 
     }
 
-    public async getNotarizedTimestamp(hash: string, index?: string): Promise<Date> {
+    public async getNotarizedTimestamp(hash: string, index?: string, proof?: any): Promise<Date> {
 
-        return new Date();
+        if (!proof) throw new Error('Shimmer requires a proof of inclusion object in order retrieve a notarized timestamp!')
+
+        const indexHex = '0x' + Converter.bytesToHex(getIndexBytes(index || hash));
+
+        const hashHex = '0x' + Converter.utf8ToHex(hash);
+
+        if (proof.block.payload.tag !== indexHex || proof.block.payload.data !== hashHex) throw new Error('Proof is not matching the requested hash!');
+
+        // use the private node's proof of inclusion endpoint
+        const poiPluginUrl = `${this.nodeURL}/api/poi/v1/validate`;
+
+        const response = await fetch(poiPluginUrl, {
+            method: 'POST',
+            body: JSON.stringify(proof),
+            headers: getNodeHeaders(),
+        });
+
+        const result = await response.json();
+
+        if (!result.valid) throw new Error('Proof of inclusion failed!');
+
+        return new Date(proof.milestone.timestamp * 1000);
 
     }
 

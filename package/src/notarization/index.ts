@@ -53,11 +53,11 @@ export async function notarizeHash(hash: string, dlt: DLT = DLT.IOTA): Promise<N
  * @param dlt - The DLT enum of the DLT where the hash is notarized
  * @returns The timestamp of the latest possible event creation
  */
-export async function getNotarizedTimestamp(hash: string, dlt: DLT = DLT.IOTA): Promise<Date> {
+export async function getNotarizedTimestamp(hash: string, dlt: DLT = DLT.IOTA, proof?: any): Promise<Date> {
 
     const DLTInstance = getDLTInstance(dlt);
 
-    return await DLTInstance.getNotarizedTimestamp(hash);
+    return await DLTInstance.getNotarizedTimestamp(hash, proof);
 
 }
 
@@ -99,7 +99,7 @@ export async function notarizeVC(credential: VerifiableCredential, dlt: DLT = DL
  * @param dlt - The DLT enum of the DLT where the hash is notarized
  * @returns The timestamp of the latest possible event creation
  */
-export async function getNotarizedVCTimestamp(credential: VerifiableCredential, dlt: DLT = DLT.IOTA): Promise<Date> {
+export async function getNotarizedVCTimestamp(credential: VerifiableCredential, dlt: DLT = DLT.IOTA, proof?: any): Promise<Date> {
 
     const hash = getVCHash(credential);
 

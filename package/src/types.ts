@@ -41,7 +41,7 @@ export type NotarizationResponse = {
 export interface DLTInterface {
     getStatus: () => Promise<any>,
     notarizeHash: (hash: string, index?: string) => Promise<NotarizationResponse>,
-    getNotarizedTimestamp: (hash: string, index?: string) => Promise<Date>
+    getNotarizedTimestamp: (hash: string, index?: string, proof?: any) => Promise<Date>
 }
 
 

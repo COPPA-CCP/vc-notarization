@@ -42,7 +42,7 @@ export class Iota implements DLTInterface {
 
     }
 
-    public async getNotarizedTimestamp(hash: string, index?: string): Promise<Date> {
+    public async getNotarizedTimestamp(hash: string, index?: string, proof?: any): Promise<Date> {
 
         const indexBytes = getIndexBytes(index || hash);
 
