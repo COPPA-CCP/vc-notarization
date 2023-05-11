@@ -20,7 +20,7 @@ The signature of a [verifiable credential](https://ec.europa.eu/digital-building
 - Hyperledger (Indy,Fabric ...?) tbd.
 
 
-## Techinical Explanations
+## Technical Explanations
 
 ### W3C JSON-LD Credentials
 
