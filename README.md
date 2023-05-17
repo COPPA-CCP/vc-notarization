@@ -1,4 +1,5 @@
 [![Tests](https://github.com/COPPA-CCP/vc-notarization/actions/workflows/npm-test.yml/badge.svg)](https://github.com/COPPA-CCP/vc-notarization/actions)
+[![npm](https://img.shields.io/npm/v/vc-notarization)](https://npm.im/vc-notarization)
 
 # vc-notarization
 Notarize verifiable credentials on DLT for provability and order
